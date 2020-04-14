@@ -46,6 +46,7 @@ values."
      helm
      shell
      auto-completion
+     neotree
      ;; treemacs
      ;; better-defaults ;; adds extra emacs style keybindings
      emacs-lisp
@@ -60,6 +61,11 @@ values."
      syntax-checking
      latex
      ;; version-control
+
+     ;; advice from https://www.reddit.com/r/spacemacs/comments/d7wdij/python_with_spacemacs_rather_than_pycharm/f16k4lp/
+     ;; python language server from here: https://github.com/palantir/python-language-server
+     company
+     lsp
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -544,9 +550,6 @@ you should place your code here."
           )))
 
   (my-global-plaintext-mode 1)
-
-  ;; add mypy python checking - this variable is void??
-  ;; (flycheck-add-next-checker 'python-flake8 'python-mypy)
 
   ;; make it faster
   (setq flycheck-highlighting-mode 'lines)
