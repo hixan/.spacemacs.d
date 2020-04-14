@@ -37,7 +37,7 @@ values."
      ;; nlinum offers the features of linum with better large buffer support.
      csv
      (python :variables python-test-runner 'pytest)
-     pdf-tools
+     pdf
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -64,7 +64,6 @@ values."
 
      ;; advice from https://www.reddit.com/r/spacemacs/comments/d7wdij/python_with_spacemacs_rather_than_pycharm/f16k4lp/
      ;; python language server from here: https://github.com/palantir/python-language-server
-     company
      lsp
      )
    ;; List of additional packages that will be installed without being
@@ -195,7 +194,7 @@ values."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme 'vim-powerline
+   dotspacemacs-mode-line-theme 'spacemacs
 
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
@@ -385,10 +384,6 @@ you should place your code here."
    'org-babel-load-languages '( (python . t) (dot . t)))
 
 
-  ;; stop python from opening new buffer on execution when its open in another frame
-  ;; see https://github.com/jorgenschaefer/elpy/issues/893
-  ;; (add-to-list 'display-buffer-alist `(,"*Python*" (display-buffer-reuse-window)))
-  (setq-default display-buffer-reuse-frames t)
 
   ;; org latex preview keybinding
   (spacemacs/set-leader-keys-for-minor-mode 'org-mode (kbd "v") 'org-latex-preview)
@@ -571,6 +566,11 @@ you should place your code here."
 
   ;; add _ as a word character
   (add-hook 'python-mode-hook (lambda () "" (modify-syntax-entry ?_ "w" python-mode-syntax-table)))
+
+  ;; stop python from opening new buffer on execution when its open in another frame
+  ;; see https://github.com/jorgenschaefer/elpy/issues/893
+  ;; (add-to-list 'display-buffer-alist `(,"*Python*" (display-buffer-reuse-window)))
+  (setq-default display-buffer-reuse-frames t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
