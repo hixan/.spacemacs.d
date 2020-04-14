@@ -405,6 +405,8 @@ you should place your code here."
   ;; "C-RET" 'ein:worksheet-execute-cell
   ;; "S-RET" 'ein:worksheet-execute-cell-and-goto-next
   (progn
+    (spacemacs/set-leader-keys-for-minor-mode 'ein:notebook "," 'ein:worksheet-execute-cell)
+    (spacemacs/set-leader-keys-for-minor-mode 'ein:notebook "c c" 'ein:worksheet-execute-all-cell)
     (spacemacs/set-leader-keys-for-minor-mode 'ein:notebook "h" 'ein:notebook-worksheet-open-prev-or-last)
     (spacemacs/set-leader-keys-for-minor-mode 'ein:notebook "j" 'ein:worksheet-goto-next-input)
     (spacemacs/set-leader-keys-for-minor-mode 'ein:notebook "k" 'ein:worksheet-goto-prev-input)
