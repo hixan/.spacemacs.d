@@ -235,7 +235,7 @@ values."
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts t
+   dotspacemacs-auto-resume-layouts nil
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
@@ -463,6 +463,8 @@ you should place your code here."
      (latex . t)))
 
   ;; Tangling and org mode code
+  ;; image size in org mode
+  (setq org-image-actual-width 500)
   ;; org mode insert template
   (spacemacs/set-leader-keys-for-minor-mode 'evil-org-mode "i t"
     'org-insert-structure-template)
@@ -567,6 +569,13 @@ you should place your code here."
   ;; add _ as a word character
   (add-hook 'python-mode-hook (lambda () "" (modify-syntax-entry ?_ "w" python-mode-syntax-table)))
 
+  ;; disable stop on error for pytest
+  (setq pytest-cmd-flags "")
+
+  ;; set python interperater
+  (setq python-shell-interpreter "/home/alex/.anaconda3/envs/general/bin/python")
+  (setq org-babel-python-command "/home/alex/.anaconda3/envs/general/bin/python")
+
   ;; stop python from opening new buffer on execution when its open in another frame
   ;; see https://github.com/jorgenschaefer/elpy/issues/893
   ;; (add-to-list 'display-buffer-alist `(,"*Python*" (display-buffer-reuse-window)))
@@ -603,3 +612,87 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((((class color) (min-colors 89)) (:foreground "#d3d3d3" :background "#000000" :family "Source Code Pro" :foundry "ADBO" :slant normal :weight normal :height 98 :width normal)))))
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
+ '(custom-enabled-themes '(spacemacs-dark))
+ '(custom-safe-themes
+   '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
+ '(ein:output-area-inlined-images t)
+ '(evil-want-Y-yank-to-eol nil)
+ '(fci-rule-color "#383838" t)
+ '(hl-todo-keyword-faces
+   '(("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2d9574")
+     ("PROG" . "#4f97d7")
+     ("OKAY" . "#4f97d7")
+     ("DONT" . "#f2241f")
+     ("FAIL" . "#f2241f")
+     ("DONE" . "#86dc2f")
+     ("NOTE" . "#b1951d")
+     ("KLUDGE" . "#b1951d")
+     ("HACK" . "#b1951d")
+     ("TEMP" . "#b1951d")
+     ("FIXME" . "#dc752f")
+     ("XXX+" . "#dc752f")
+     ("\\?\\?\\?+" . "#dc752f")))
+ '(org-agenda-files
+   '("/home/alex/Documents/Uni/Comp5046 NLP/Week 02/NLP L2.org" "/home/alex/Documents/Uni/Comp5046 NLP/Week 03/NLP L3.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 01/DS L1.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 02/DS L2.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 03/DS L3.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 04/DS L4.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 04/original.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 04/submission.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 05/05_Summarising_Data_with_SQL.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 05/DS t5.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 05/test.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 06/06_hypothesis_testing_and_evaluation.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/Week 06/DS t6.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/nogit_Project/assignment ideas.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/nogit_Project/initial_analysis.org" "/home/alex/Documents/Uni/Comp5310 Principles of DS/nogit_Project/normalize.org" "/home/alex/Documents/Uni/Comp5318 Machine Learning/Week 03/ML L3.org" "/home/alex/Documents/Uni/Comp9007 Algorithms/Assignment 1/assignment 1.org" "/home/alex/Documents/Uni/Comp9007 Algorithms/Quiz 1/quiz 1.org" "/home/alex/Documents/Uni/Comp9007 Algorithms/Week 01/Algorithms L1.org" "/home/alex/Documents/Uni/Comp9007 Algorithms/Week 03/Algorithms L3.org" "/home/alex/Documents/Uni/Comp9007 Algorithms/Week 04/Algorithms L4.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Assignment 1/DBMS A1.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Reference/ER Diagrams.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Week 01/DBMS L1.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Week 02/DBMS L2.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Week 03/DBMS L3.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Week 04/DBMS L4.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Week 04/DBMS T4.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Week 05/DBMS L5.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Week 05/DBMS T5.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Week 06/DBMS t6.org" "/home/alex/Documents/Uni/Comp9120 DBMS/Week 09/DBMS L9.org" "/home/alex/Documents/Uni/Stat5002 Intro to Stats/Quiz 1/Stats Q1.org" "/home/alex/Documents/Uni/Stat5002 Intro to Stats/Week 01/Stats L1.org" "/home/alex/Documents/Uni/Stat5002 Intro to Stats/Week 02/Stats L2.org" "/home/alex/Documents/Uni/Stat5002 Intro to Stats/Week 03/Stats L3.org" "/home/alex/Documents/Uni/Stat5002 Intro to Stats/Week 04/Stats L4.org" "/home/alex/Documents/Uni/Stat5002 Intro to Stats/Week 05/Stats l5.org" "/home/alex/Documents/Uni/Stat5002 Intro to Stats/Week 06/Stats l6.org" "/home/alex/Documents/Uni/clean.org" "/home/alex/Documents/Uni/general organization.org" "/home/alex/Documents/Uni/test.org"))
+ '(package-selected-packages
+   '(sql-indent web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode sphinx-doc org-tanglesync nlinum-relative nlinum ob-async lentic m-buffer smeargle orgit magit-gitflow magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit git-commit with-editor transient company-auctex auctex-latexmk auctex mmm-mode markdown-toc markdown-mode gh-md csv-mode pdf-tools tablist ein eink-theme polymode deferred anaphora websocket xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help helm-company helm-c-yasnippet fuzzy company-statistics company-anaconda company auto-yasnippet yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download live-py-mode hy-mode dash-functional htmlize helm-pydoc gnuplot flycheck-pos-tip pos-tip flycheck cython-mode anaconda-mode pythonic ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
+ '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
+ '(safe-local-variable-values
+   '((eval add-to-list 'org-export-exclude-tags "TOC")
+     (eval local-set-key
+           (kbd "<f12>")
+           '(lambda nil
+              (interactive)
+              (org-babel-goto-named-src-block "make-portrait")
+              (org-babel-execute-src-block)
+              (outline-hide-sublevels 1)))
+     (eval local-set-key
+           (kbd "<f11>")
+           '(lambda nil
+              (interactive)
+              (org-babel-goto-named-src-block "make-readme")
+              (org-babel-execute-src-block)
+              (outline-hide-sublevels 1)))
+     (eval progn
+           (visual-line-mode t)
+           (require 'ox-extra)
+           (ox-extras-activate
+            '(ignore-headlines)))
+     (eval setq org-latex-default-packages-alist
+           (cons
+            '("mathletters" "ucs" nil)
+            org-latex-default-packages-alist))
+     (org-latex-inputenc-alist
+      ("utf8" . "utf8x"))
+     (eval ox-extras-activate
+           '(ignore-headlines))
+     (eval require 'ox-extra)
+     (eval visual-line-mode t)
+     (eval setq org-highlight-latex-and-related
+           '(latex))
+     (javascript-backend . tide)
+     (javascript-backend . tern)
+     (javascript-backend . lsp))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((((class color) (min-colors 89)) (:foreground "#d3d3d3" :background "#000000" :family "Source Code Pro" :foundry "ADBO" :slant normal :weight normal :height 98 :width normal)))))
+)
