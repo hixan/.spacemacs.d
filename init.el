@@ -381,11 +381,10 @@ you should place your code here."
 
   ;; enable python in orgmode command blocks
   (org-babel-do-load-languages
-   'org-babel-load-languages '( (python . t) (dot . t)))
+   'org-babel-load-languages '((python . t) (dot . t)))
 
 
-
-  ;; org latex preview keybinding
+  ;; org latex and image preview keybinding
   (spacemacs/set-leader-keys-for-minor-mode 'org-mode (kbd "v") 'org-latex-preview)
   (spacemacs/set-leader-keys-for-minor-mode 'org-mode (kbd "V") 'org-toggle-inline-images)
 
@@ -545,28 +544,15 @@ you should place your code here."
                          )))
           (centered-cursor-mode)
           ;;(spacemacs/toggle-line-numbers-on)
-          ;;(nlinum-relative-mode)
           )))
 
   (my-global-plaintext-mode 1)
 
-  ;; make it faster
-  (setq flycheck-highlighting-mode 'lines)
-  (org-reload)
-
-  ;; disable automatic explenation of errors
-  (defadvice flycheck-display-error-at-point-soon
-      (after flycheck-display-error-at-point-soon-advice activate compile)
-    (flycheck-cancel-error-display-error-at-point-timer))
-
-  ;; make windows split vertically instead of horisontally
-  (setq split-height-threshold nil)
-  (setq split-width-threshold 80)
 
   ;; add all uni files to agenda (so the todo shows up)
   (setq org-agenda-files (directory-files-recursively "~/Documents/Uni/" "\.org$"))
 
-  ;; add _ as a word character
+  ;; add _ as a word character in python mode
   (add-hook 'python-mode-hook (lambda () "" (modify-syntax-entry ?_ "w" python-mode-syntax-table)))
 
   ;; disable stop on error for pytest
@@ -575,11 +561,15 @@ you should place your code here."
   ;; set python interperater
   (setq python-shell-interpreter "/home/alex/.anaconda3/envs/general/bin/python")
   (setq org-babel-python-command "/home/alex/.anaconda3/envs/general/bin/python")
+  (setq org-src-tab-acts-natively t)
+  (setq org-edit-src-content-indentation 0)
 
   ;; stop python from opening new buffer on execution when its open in another frame
+  ;; TODO none of these solutions work. Find one that does
+  ;; maybe have a toggle for when pythonmode automatically opens a compilation buffer in a new window
   ;; see https://github.com/jorgenschaefer/elpy/issues/893
   ;; (add-to-list 'display-buffer-alist `(,"*Python*" (display-buffer-reuse-window)))
-  (setq-default display-buffer-reuse-frames t)
+  ;; (setq-default display-buffer-reuse-frames t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
