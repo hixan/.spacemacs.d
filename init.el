@@ -81,6 +81,8 @@ values."
                                       ;; https://emacs.stackexchange.com/questions/19422/library-for-automatically-inserting-python-docstring-in-google-style
                                       ein
                                       ob-async
+                                      ;; TODO get better lentic views
+                                      lentic
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
