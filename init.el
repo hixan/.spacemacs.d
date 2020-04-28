@@ -484,7 +484,7 @@ you should place your code here."
 
   ;; disable current line highlighting (centered line shows where you are much
   ;; better)
-  (spacemacs/toggle-highlight-current-line-globally-off)
+  ;; (spacemacs/toggle-highlight-current-line-globally-off)
 
   ;; latex style for exporting org files to pdf
   (unless (boundp 'org-latex-classes)
@@ -551,7 +551,8 @@ you should place your code here."
           ;;(spacemacs/toggle-line-numbers-on)
           )))
 
-  (my-global-plaintext-mode 1)
+  ;; uncomment to enable global centered line mode. (It slows down less powerful systems)
+  ;; (my-global-plaintext-mode 1)
 
 
   ;; add all uni files to agenda (so the todo shows up)
