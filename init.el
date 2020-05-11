@@ -31,13 +31,14 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(html
+     (conda :variables conda-anaconda-home "/home/alex/.anaconda3")
      sql
      javascript
      markdown
      ;; nlinum offers the features of linum with better large buffer support.
      csv
      (python :variables python-test-runner 'pytest python-backend 'lsp)
-     pdf
+     ;; pdf ;; TODO this stopped working at latest release.
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -50,6 +51,8 @@ values."
      ;; treemacs
      ;; better-defaults ;; adds extra emacs style keybindings
      emacs-lisp
+     ;; to allow magit to see files inside of directories, run the following command:
+     ;; git config --global status.showUntrackedFiles all
      git
      ;; markdown
      multiple-cursors
@@ -89,6 +92,7 @@ values."
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
                                     smartparens ;; dont use smartparens
+                                    company-tern ;; see https://github.com/syl20bnr/spacemacs/issues/13530
                                     );;neotree)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
@@ -180,7 +184,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(
+   dotspacemacs-themes '(solarized-dark
                          cyberpunk
                          leuven
                          inkpot
@@ -269,7 +273,7 @@ values."
    dotspacemacs-loading-progress-bar nil
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup t
+   dotspacemacs-fullscreen-at-startup nil
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native t
@@ -392,9 +396,6 @@ you should place your code here."
   ;; org latex and image preview keybinding
   (spacemacs/set-leader-keys-for-minor-mode 'org-mode (kbd "v") 'org-latex-preview)
   (spacemacs/set-leader-keys-for-minor-mode 'org-mode (kbd "V") 'org-toggle-inline-images)
-
-  ;; enable transparency
-  (spacemacs/toggle-transparency)
 
   ;; ein keybindings
   ;;(evil-define-minor-mode-key 'normal 'ein:notebook (kbd "<c-return>") 'ein:ein:worksheet-execute-cell)
@@ -548,18 +549,18 @@ you should place your code here."
                          'magit-revision-mode
                          )))
           (centered-cursor-mode)
-          ;;(spacemacs/toggle-line-numbers-on)
+          (spacemacs/toggle-line-numbers-on)
           )))
 
   ;; uncomment to enable global centered line mode. (It slows down less powerful systems)
-  ;; (my-global-plaintext-mode 1)
+  (my-global-plaintext-mode 1)
 
 
   ;; add all uni files to agenda (so the todo shows up)
-   (setq org-agenda-files '("~/Documents/Uni/Comp5310 Principles of DS/TODOs.org"
-                           "~/Documents/Uni/Comp9120 DBMS/TODOs.org"
-                           "~/Documents/Uni/Comp9007 Algorithms/TODOs.org"
-                           "~/Documents/Uni/Stat5002 Intro to Stats/TODOs.org"
+   (setq org-agenda-files '("~/Documents/Uni/comp5310_principles_of_ds/TODOs.org"
+                           "~/Documents/Uni/comp9120_dbms/TODOs.org"
+                           "~/Documents/Uni/comp9007_algorithms/TODOs.org"
+                           "~/Documents/Uni/stat5002_intro_to_statistics/TODOs.org"
                            ))
 
   ;; add _ as a word character in python mode
@@ -571,8 +572,8 @@ you should place your code here."
   ;; set python interperater
   ;; TODO this is a temporary solution. The proper solution is to set `exec-path' correctly.
   ;; see exec-path-from-shell?
-  (setq python-shell-interpreter "/home/alex/.anaconda3/envs/general/bin/python")
-  (setq org-babel-python-command "/home/alex/.anaconda3/envs/general/bin/python")
+  ;; (setq python-shell-interpreter "/home/alex/.anaconda3/envs/general/bin/python")
+  ;; (setq org-babel-python-command "/home/alex/.anaconda3/envs/general/bin/python")
 
   ;; attempt to make org-mode python src blocks behave nicely with indentation
   (setq org-src-tab-acts-natively t)
@@ -637,9 +638,6 @@ rotate entire document."
 
  (spacemacs/set-leader-keys-for-minor-mode 'org-mode (kbd "R")  'pdf-view-rotate-clockwise)
   )
-
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
@@ -650,78 +648,17 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["black" "red3" "ForestGreen" "yellow3" "blue" "magenta3" "DeepSkyBlue" "gray50"])
- '(custom-enabled-themes '(spacemacs-dark))
- '(custom-safe-themes
-   '("bffa9739ce0752a37d9b1eee78fc00ba159748f50dc328af4be661484848e476" default))
- '(ein:output-area-inlined-images t)
  '(evil-want-Y-yank-to-eol nil)
- '(fci-rule-color "#383838" t)
- '(helm-completion-style 'emacs)
- '(hl-todo-keyword-faces
-   '(("TODO" . "#dc752f")
-     ("NEXT" . "#dc752f")
-     ("THEM" . "#2d9574")
-     ("PROG" . "#4f97d7")
-     ("OKAY" . "#4f97d7")
-     ("DONT" . "#f2241f")
-     ("FAIL" . "#f2241f")
-     ("DONE" . "#86dc2f")
-     ("NOTE" . "#b1951d")
-     ("KLUDGE" . "#b1951d")
-     ("HACK" . "#b1951d")
-     ("TEMP" . "#b1951d")
-     ("FIXME" . "#dc752f")
-     ("XXX+" . "#dc752f")
-     ("\\?\\?\\?+" . "#dc752f")))
- '(package-selected-packages
-   '(sql-indent web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode sphinx-doc org-tanglesync nlinum-relative nlinum ob-async lentic m-buffer smeargle orgit magit-gitflow magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit git-commit with-editor transient company-auctex auctex-latexmk auctex mmm-mode markdown-toc markdown-mode gh-md csv-mode pdf-tools tablist ein eink-theme polymode deferred anaphora websocket xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help helm-company helm-c-yasnippet fuzzy company-statistics company-anaconda company auto-yasnippet yasnippet ac-ispell auto-complete yapfify pyvenv pytest pyenv-mode py-isort pip-requirements org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download live-py-mode hy-mode dash-functional htmlize helm-pydoc gnuplot flycheck-pos-tip pos-tip flycheck cython-mode anaconda-mode pythonic ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))
- '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e"))
  '(safe-local-variable-values
-   '((org-babel-min-lines-for-block-output . 0)
-     (lentic-init . lentic-org-python-init)
-     (eval add-to-list 'org-export-exclude-tags "TOC")
-     (eval local-set-key
-           (kbd "<f12>")
-           '(lambda nil
-              (interactive)
-              (org-babel-goto-named-src-block "make-portrait")
-              (org-babel-execute-src-block)
-              (outline-hide-sublevels 1)))
-     (eval local-set-key
-           (kbd "<f11>")
-           '(lambda nil
-              (interactive)
-              (org-babel-goto-named-src-block "make-readme")
-              (org-babel-execute-src-block)
-              (outline-hide-sublevels 1)))
-     (eval progn
-           (visual-line-mode t)
-           (require 'ox-extra)
-           (ox-extras-activate
-            '(ignore-headlines)))
-     (eval setq org-latex-default-packages-alist
-           (cons
-            '("mathletters" "ucs" nil)
-            org-latex-default-packages-alist))
-     (org-latex-inputenc-alist
-      ("utf8" . "utf8x"))
-     (eval ox-extras-activate
-           '(ignore-headlines))
-     (eval require 'ox-extra)
-     (eval visual-line-mode t)
-     (eval setq org-highlight-latex-and-related
-           '(latex))
+   (quote
+    ((lentic-init . lentic-org-python-init)
      (javascript-backend . tide)
      (javascript-backend . tern)
-     (javascript-backend . lsp))))
+     (javascript-backend . lsp)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 89)) (:foreground "#839496" :background "#002b36")))))
 )
