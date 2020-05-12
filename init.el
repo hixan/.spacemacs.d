@@ -31,13 +31,13 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(html
-     (conda :variables conda-anaconda-home "/home/alex/.anaconda3")
+     ;;(conda :variables conda-anaconda-home "/home/alex/.anaconda3")
      sql
      javascript
      markdown
      ;; nlinum offers the features of linum with better large buffer support.
      csv
-     (python :variables python-test-runner 'pytest python-backend 'lsp)
+     (python :variables python-test-runner 'pytest python-backend 'lsp) ;;lsp
      ;; pdf ;; TODO this stopped working at latest release.
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -564,7 +564,8 @@ you should place your code here."
                            ))
 
   ;; add _ as a word character in python mode
-  (add-hook 'python-mode-hook (lambda () "" (modify-syntax-entry ?_ "w" python-mode-syntax-table)))
+  (add-hook 'python-mode-hook
+            (lambda () "" (modify-syntax-entry ?_ "w" python-mode-syntax-table)))
 
   ;; disable stop on error for pytest
   (setq pytest-cmd-flags "")
@@ -586,7 +587,7 @@ you should place your code here."
   ;; see https://github.com/jorgenschaefer/elpy/issues/893
   ;; (add-to-list 'display-buffer-alist `(,"*Python*" (display-buffer-reuse-window)))
   ;; (setq-default display-buffer-reuse-frames t)
-
+  (setenv "WORKON_HOME" "/home/alex/.anaconda3/envs")
 
 
   ;; EXPERIMENTAL rotate pages in PDF-mode.
