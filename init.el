@@ -536,6 +536,49 @@ you should place your code here."
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")))
+  (add-to-list 'org-latex-classes
+               '("report"
+                 "\\documentclass[11pt,a4paper]{article}
+\\usepackage[left=1cm, right=1cm, top=1cm]{geometry}  % define margins
+\\usepackage[utf8]{inputenc}
+\\usepackage[T1]{fontenc}
+%\\usepackage{fixltx2e}
+\\usepackage{graphicx}
+\\usepackage{longtable}
+\\usepackage{float}
+\\usepackage{wrapfig}
+\\usepackage{rotating}
+\\usepackage[normalem]{ulem}
+\\usepackage{amsmath}
+\\usepackage{textcomp}
+\\usepackage{marvosym}
+\\usepackage{wasysym}
+\\usepackage{amssymb}
+\\usepackage{hyperref}
+\\usepackage{mathpazo}
+\\usepackage{color}
+\\usepackage{enumerate}
+\\usepackage{tcolorbox} % for box around codeblocks
+\\usepackage{etoolbox} % for box around codeblocks
+\\usepackage[fancyvrb=true]{listings}
+\\definecolor{bg}{rgb}{0.95,0.95,0.95}
+\\tolerance=1000
+      [NO-DEFAULT-PACKAGES]
+      [PACKAGES]
+      [EXTRA]
+\\linespread{1}
+\\hypersetup{pdfborder=0 0 0}
+
+% add box around codeblocks
+\\BeforeBeginEnvironment{minted}{\\begin{tcolorbox}}
+\\AfterEndEnvironment{minted}{\\end{tcolorbox}}
+% set the minted default font size
+\\setminted{fontsize=\\footnotesize}
+"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")))
 
    ;; Define global settings for plaintext like buffers
    (define-global-minor-mode my-global-plaintext-mode centered-cursor-mode
