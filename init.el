@@ -41,6 +41,7 @@ values."
      ;; nlinum offers the features of linum with better large buffer support.
      csv
      (python :variables python-test-runner 'pytest python-backend 'lsp) ;;lsp
+     (ess :variables ess-r-backend 'lsp)
      ;; pdf ;; TODO this stopped working at latest release.
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -94,7 +95,7 @@ values."
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(
-                                    smartparens ;; dont use smartparens
+                                    ;;smartparens ;; dont use smartparens
                                     company-tern ;; see https://github.com/syl20bnr/spacemacs/issues/13530
                                     );;neotree)
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -187,14 +188,15 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-dark
+   dotspacemacs-themes '(spacemacs-light
                          cyberpunk
                          leuven
                          inkpot
                          zenburn
+
                          soft-charcoal
                          spacemacs-dark
-                         spacemacs-light
+                         solarized-dark
                          )
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
@@ -317,7 +319,7 @@ values."
    ;;  :size-limit-kb 1000)
    ;; when used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -389,12 +391,17 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  ;; enable python in orgmode command blocks
+  ;; evil numbers keybindings (c-a and c-x to increment and decrement numbers)
+  (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+  (define-key evil-visual-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
+  (define-key evil-visual-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
+
+  ;; enable org-babel languages
   (org-babel-do-load-languages
    'org-babel-load-languages '((python . t)
                                (dot . t)
-                               (R .t)))
-
+                               (R . t)))
 
   ;; org latex and image preview keybinding
   (spacemacs/set-leader-keys-for-minor-mode 'org-mode (kbd "v") 'org-latex-preview)
@@ -579,9 +586,10 @@ you should place your code here."
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                  ("\\paragraph{%s}" . "\\paragraph*{%s}")))
+  (setq org-list-allow-alphabetical t)
 
    ;; Define global settings for plaintext like buffers
-   (define-global-minor-mode my-global-plaintext-mode centered-cursor-mode
+   (define-global-minor-mode my-centered-cursor-mode centered-cursor-mode
      (lambda ()
        (when (not (memq major-mode
                         (list
@@ -595,11 +603,27 @@ you should place your code here."
                          'magit-revision-mode
                          )))
           (centered-cursor-mode)
-          (spacemacs/toggle-line-numbers-on)
           )))
 
+   ;;(define-global-minor-mode my-line-number-mode centered-cursor-mode
+     ;;(lambda ()
+       ;;(when (not (memq major-mode
+                        ;;(list
+                         ;;;; put modes to exclude here
+                         ;;'slime-repl-mode
+                         ;;'shell-mode
+                         ;;'pdf-view-mode
+                         ;;'spacemacs-buffer-mode
+                         ;;'term-mode
+                         ;;'magit-mode
+                         ;;'magit-revision-mode
+                         ;;'compilation-mode
+                         ;;)))
+         ;;(spacemacs/toggle-line-numbers-on)
+         ;;)))
+
   ;; uncomment to enable global centered line mode. (It slows down less powerful systems)
-  (my-global-plaintext-mode 1)
+  (my-centered-cursor-mode 1)
 
 
   ;; add all uni files to agenda (so the todo shows up)
@@ -625,6 +649,7 @@ you should place your code here."
   ;; attempt to make org-mode python src blocks behave nicely with indentation
   (setq org-src-tab-acts-natively t)
   (setq org-edit-src-content-indentation 0)
+  (setq org-export-allow-bind-keywords t)
   (global-lentic-mode)
 
   ;; stop python from opening new buffer on execution when its open in another frame
