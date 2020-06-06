@@ -57,6 +57,8 @@ values."
      emacs-lisp
      ;; to allow magit to see files inside of directories, run the following command:
      ;; git config --global status.showUntrackedFiles all
+     ;; to store git credentials
+     ;; git config --global credential.helper store
      git
      ;; markdown
      multiple-cursors
@@ -660,6 +662,7 @@ you should place your code here."
   ;; (setq-default display-buffer-reuse-frames t)
   (setenv "WORKON_HOME" "/home/alex/.anaconda3/envs")
 
+  (setq org-download-screenshot-method "deepin-screenshot -n -s %s")
 
   ;; EXPERIMENTAL rotate pages in PDF-mode.
  (defun pdf-view--rotate (&optional counterclockwise-p page-p)
