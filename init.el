@@ -399,6 +399,8 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
   (define-key evil-visual-state-map (kbd "C-x") 'evil-numbers/dec-at-pt)
 
+  ;; set urxvt as external terminal
+  (setq terminal-here-terminal-command '("urxvt" "-fade" "50"))
   ;; enable org-babel languages
   (org-babel-do-load-languages
    'org-babel-load-languages '((python . t)
@@ -587,7 +589,14 @@ you should place your code here."
                  ("\\section{%s}" . "\\section*{%s}")
                  ("\\subsection{%s}" . "\\subsection*{%s}")
                  ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-                 ("\\paragraph{%s}" . "\\paragraph*{%s}")))
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ))
+  (add-to-list 'org-latex-classes '("letter" "\\documentclass{letter}"
+                                    ("\\section{%s}" . "\\section*{%s}")
+                                    ("\\subsection{%s}" . "\\subsection*{%s}")
+                                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                                    ))
   (setq org-list-allow-alphabetical t)
 
    ;; Define global settings for plaintext like buffers
@@ -662,7 +671,7 @@ you should place your code here."
   ;; (setq-default display-buffer-reuse-frames t)
   (setenv "WORKON_HOME" "/home/alex/.anaconda3/envs")
 
-  (setq org-download-screenshot-method "deepin-screenshot -n -s %s")
+  (setq org-download-screenshot-method "flameshot gui --raw > %s")
 
   ;; EXPERIMENTAL rotate pages in PDF-mode.
  (defun pdf-view--rotate (&optional counterclockwise-p page-p)
