@@ -405,11 +405,14 @@ you should place your code here."
   (org-babel-do-load-languages
    'org-babel-load-languages '((python . t)
                                (dot . t)
-                               (R . t)))
+                               (R . t)
+                               (shell . t)))
 
   ;; org latex and image preview keybinding
   (spacemacs/set-leader-keys-for-minor-mode 'org-mode (kbd "v") 'org-latex-preview)
   (spacemacs/set-leader-keys-for-minor-mode 'org-mode (kbd "V") 'org-toggle-inline-images)
+  ;; org image size
+  (setq org-image-actual-width 30)
 
   ;; ein keybindings
   ;;(evil-define-minor-mode-key 'normal 'ein:notebook (kbd "<c-return>") 'ein:ein:worksheet-execute-cell)
@@ -502,8 +505,8 @@ you should place your code here."
   ;; (spacemacs/toggle-highlight-current-line-globally-off)
 
   ;; latex style for exporting org files to pdf
-  (unless (boundp 'org-latex-classes)
-    (setq org-latex-classes nil))
+;;  (unless (boundp 'org-latex-classes)
+;;    (setq org-latex-classes nil))
   (add-to-list 'org-latex-classes
                '("assignment"
                  "\\documentclass[11pt,a4paper]{article}
